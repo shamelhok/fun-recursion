@@ -95,4 +95,47 @@ function deepIncludes(arr, value) {
     // }
 }
 
-module.exports={factorial, sum,  reverseString, countSpaces, sumDigits, fibonacci, deepTotals, deepIncludes}
+function countObjects(obj){
+    let count =1
+    for (key in obj){
+        if(typeof(obj[key])==='object'){
+            count += countObjects(obj[key])
+        }
+    }
+    return count
+}
+
+function deepFreeze(obj){
+    Object.freeze(obj)
+    for(key in obj){
+      if(typeof(obj[key])==='object'){
+        deepFreeze(obj[key])
+      }
+    }
+}
+
+function analyzeArray(str,array){
+    
+    // let index2;
+    for(index in array){
+        let path= str
+        path +='.'+index
+        console.log(path)
+        // index2 = index
+        //console.log(index, 'this is the idex')
+        if(Array.isArray(array[index])){
+         path+= analyzeArray(str,array[index])
+        }
+
+        console.log(path +`: ${array[index]}`)
+       // return index
+    }
+    // return index2
+    
+}
+
+const arr = ["carrot", ["car", "boat", "plane"], "turtle", ["house"]];
+analyzeArray("jimbo", arr);
+
+module.exports={factorial, sum,  reverseString, countSpaces, sumDigits,
+    fibonacci, deepTotals, deepIncludes, countObjects, deepFreeze}

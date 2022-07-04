@@ -1,5 +1,5 @@
 const {factorial, sum, reverseString, countSpaces
-, sumDigits, fibonacci, deepTotals, deepIncludes} = require('./index')
+, sumDigits, fibonacci, deepTotals, deepIncludes, countObjects, deepFreeze} = require('./index')
 
 describe('factorial',()=>{
     test('factorial of 0 equals 1',()=>{
@@ -85,4 +85,42 @@ describe('deepIncludes', () => {
         expect(deepIncludes(["toast", ["avocado", ["chilli flakes"]]], "avocado")).toBe(true)
     })
 })
+
+describe('count objects', ()=>{
+    test('empty object should return 1', () => {
+        expect(countObjects({})).toBe(1)
+    });
+    test('no nested objects', () => {
+        expect(countObjects({ a: 1 })).toBe(1)
+    });
+    test('counts number of nested objects', () => {
+        expect(countObjects({ a: { b: { c: 1 } } })).toBe(3)
+    });
+})
+
+describe('deep freeze',()=>{
+    test('freezes object with no nested objects ', () => {
+        const object={}
+        deepFreeze(object)
+        object.name='sarah'
+        expect(object).toEqual({})
+    });
+    test('freezes object with no nested objects ', () => {
+        const object={name:'shamel'}
+        deepFreeze(object)
+        object.name='sarah'
+        delete object.name
+        expect(object).toEqual({name:'shamel'})
+    });
+    test('freezes nested objects ', () => {
+        const object={name:{age:25}}
+        deepFreeze(object)
+        object.name='sarah'
+        delete object.name
+        delete object.name.age
+
+        expect(object).toEqual({name:{age:25}})
+    });
+})
+
 
