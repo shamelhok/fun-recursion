@@ -47,7 +47,52 @@ function sumDigits(num){
     return sumDigits(sum)
 }
 
-module.exports={factorial, sum,  reverseString, countSpaces, sumDigits}
+function fibonacci(num){
+    if (num === 1) {
+        return 0
+    }
+    if (num === 2) {
+        return 1
+    }
+    return fibonacci(num-1) + fibonacci(num-2)
+}
 
-console.log(parseInt(''))
-console.log(NaN.toString())
+function deepTotals(arr) {
+    let total = 0
+    if (arr === []) {
+        return 0
+    }
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === 'object'){
+            total += deepTotals(arr[i])
+        }
+        if(typeof arr[i] === 'number') {
+            total += arr[i]
+        }
+    }
+    return total
+}
+
+function deepIncludes(arr, value) {
+    if (arr === []) {
+        return false
+    }
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === 'object'){
+           return deepIncludes(arr[i], value)
+        }
+        if(arr.includes(value)) {
+            return true
+        }
+    }
+    return false
+    // for (let i = 0; i < arr.length; i++) {
+    //   if (arr[i] === value){
+    //     console.log('true')
+    //     return true
+    //   }
+    //   if (typeof(arr[i]) === 'object') return deepIncludes(arr[i], value)
+    // }
+}
+
+module.exports={factorial, sum,  reverseString, countSpaces, sumDigits, fibonacci, deepTotals, deepIncludes}

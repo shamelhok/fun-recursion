@@ -1,5 +1,5 @@
 const {factorial, sum, reverseString, countSpaces
-, sumDigits} = require('./index')
+, sumDigits, fibonacci, deepTotals, deepIncludes} = require('./index')
 
 describe('factorial',()=>{
     test('factorial of 0 equals 1',()=>{
@@ -54,3 +54,35 @@ describe('sum digits',()=>{
         expect(sumDigits(99)).toBe(9)
     });
 })
+
+describe('fibonacci', () => {
+    test('returns matching fibonacci sequence',() => {
+        expect(fibonacci(1)).toBe(0)
+        expect(fibonacci(2)).toBe(1)
+        expect(fibonacci(7)).toBe(8)
+        expect(fibonacci(8)).toBe(13)
+    })
+})
+
+describe('deepTotals', () => {
+    test('empty array returns 0', () => {
+        expect(deepTotals([])).toBe(0)
+    })
+    test('returns totals of nested arrays', () => {
+        expect(deepTotals([1, 2, 3])).toBe(6)
+        expect(deepTotals([1, [5, 10]])).toBe(16)
+        expect(deepTotals([3, [[6]], 9])).toBe(18)
+    })
+
+})
+
+describe('deepIncludes', () => {
+    test('empty array returns false', () => {
+        expect(deepIncludes([])).toBe(false)
+    })
+    test('returns true if value is in nested array', () => {
+        expect(deepIncludes([1, 2], 3)).toBe(false)
+        expect(deepIncludes(["toast", ["avocado", ["chilli flakes"]]], "avocado")).toBe(true)
+    })
+})
+
