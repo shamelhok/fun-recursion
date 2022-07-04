@@ -114,24 +114,35 @@ function deepFreeze(obj){
     }
 }
 
-function analyzeArray(str,array){
-    
+function analyzeArray(str,array,tempIndex=''){
+    let path= str +'.'+ tempIndex
     // let index2;
     for(index in array){
-        let path= str
+        
         path +='.'+index
-        console.log(path)
+        //console.log(tempIndex, 'is temp index')
+        
         // index2 = index
         //console.log(index, 'this is the idex')
         if(Array.isArray(array[index])){
-         path+= analyzeArray(str,array[index])
-        }
+            tempIndex= index
+         path+= analyzeArray(str,array[index],tempIndex)
+        }else{
 
         console.log(path +`: ${array[index]}`)
+    }
        // return index
     }
     // return index2
     
+    
+    // if (array.length=0){
+    //     return str
+    // }
+    // if(Array.isArray(array[0])){
+    //     return analyzeArray(array.slice(1))+ 
+    // }
+
 }
 
 const arr = ["carrot", ["car", "boat", "plane"], "turtle", ["house"]];
