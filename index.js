@@ -114,7 +114,20 @@ function deepFreeze(obj){
     }
 }
 
-function analyzeArray(str,array,tempIndex=''){
+function analyzeArray(str,array,tempIndex){
+    let path= str
+    if(tempIndex!==undefined){
+     path = path  +'.'+ tempIndex
+    }
+    for(index in array){
+        if(Array.isArray(array[index])){
+            tempIndex= index
+         analyzeArray(str,array[index],tempIndex)
+        }else{
+             console.log(path +`.${index}: ${array[index]}`)
+    }
+    }
+    /*
     let path= str +'.'+ tempIndex
     // let index2;
     for(index in array){
@@ -142,7 +155,7 @@ function analyzeArray(str,array,tempIndex=''){
     // if(Array.isArray(array[0])){
     //     return analyzeArray(array.slice(1))+ 
     // }
-
+    */
 }
 
 const arr = ["carrot", ["car", "boat", "plane"], "turtle", ["house"]];
